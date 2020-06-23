@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		491CCB5D24A2AF25006232C7 /* Pappe in Frameworks */ = {isa = PBXBuildFile; productRef = 491CCB5C24A2AF25006232C7 /* Pappe */; };
+		49D70CE4249EA02100A546CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D70CE3249EA02100A546CE /* AppDelegate.swift */; };
+		49D70CE6249EA02100A546CE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 49D70CE5249EA02100A546CE /* GameScene.sks */; };
+		49D70CEA249EA02100A546CE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D70CE9249EA02100A546CE /* GameScene.swift */; };
+		49D70CEC249EA02100A546CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D70CEB249EA02100A546CE /* ViewController.swift */; };
+		49D70CEE249EA02300A546CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49D70CED249EA02300A546CE /* Assets.xcassets */; };
+		49D70CF1249EA02300A546CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D70CEF249EA02300A546CE /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		49D70CE0249EA02100A546CE /* BlinkerPappe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlinkerPappe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49D70CE3249EA02100A546CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49D70CE5249EA02100A546CE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		49D70CE9249EA02100A546CE /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		49D70CEB249EA02100A546CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49D70CED249EA02300A546CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49D70CF0249EA02300A546CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49D70CF2249EA02300A546CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49D70CF3249EA02300A546CE /* BlinkerPappe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlinkerPappe.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49D70CDD249EA02100A546CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				491CCB5D24A2AF25006232C7 /* Pappe in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49D70CD7249EA02100A546CE = {
+			isa = PBXGroup;
+			children = (
+				49D70CE2249EA02100A546CE /* BlinkerPappe */,
+				49D70CE1249EA02100A546CE /* Products */,
+				49D70CFA249EAAB500A546CE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49D70CE1249EA02100A546CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49D70CE0249EA02100A546CE /* BlinkerPappe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49D70CE2249EA02100A546CE /* BlinkerPappe */ = {
+			isa = PBXGroup;
+			children = (
+				49D70CE3249EA02100A546CE /* AppDelegate.swift */,
+				49D70CE5249EA02100A546CE /* GameScene.sks */,
+				49D70CE9249EA02100A546CE /* GameScene.swift */,
+				49D70CEB249EA02100A546CE /* ViewController.swift */,
+				49D70CED249EA02300A546CE /* Assets.xcassets */,
+				49D70CEF249EA02300A546CE /* Main.storyboard */,
+				49D70CF2249EA02300A546CE /* Info.plist */,
+				49D70CF3249EA02300A546CE /* BlinkerPappe.entitlements */,
+			);
+			path = BlinkerPappe;
+			sourceTree = "<group>";
+		};
+		49D70CFA249EAAB500A546CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49D70CDF249EA02100A546CE /* BlinkerPappe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49D70CF6249EA02300A546CE /* Build configuration list for PBXNativeTarget "BlinkerPappe" */;
+			buildPhases = (
+				49D70CDC249EA02100A546CE /* Sources */,
+				49D70CDD249EA02100A546CE /* Frameworks */,
+				49D70CDE249EA02100A546CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlinkerPappe;
+			packageProductDependencies = (
+				491CCB5C24A2AF25006232C7 /* Pappe */,
+			);
+			productName = BlinkerPappe;
+			productReference = 49D70CE0249EA02100A546CE /* BlinkerPappe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49D70CD8249EA02100A546CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = "Framework Labs";
+				TargetAttributes = {
+					49D70CDF249EA02100A546CE = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = 49D70CDB249EA02100A546CE /* Build configuration list for PBXProject "BlinkerPappe" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49D70CD7249EA02100A546CE;
+			packageReferences = (
+				491CCB5924A2AEFC006232C7 /* XCRemoteSwiftPackageReference "Pappe" */,
+			);
+			productRefGroup = 49D70CE1249EA02100A546CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49D70CDF249EA02100A546CE /* BlinkerPappe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49D70CDE249EA02100A546CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49D70CE6249EA02100A546CE /* GameScene.sks in Resources */,
+				49D70CEE249EA02300A546CE /* Assets.xcassets in Resources */,
+				49D70CF1249EA02300A546CE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49D70CDC249EA02100A546CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49D70CEC249EA02100A546CE /* ViewController.swift in Sources */,
+				49D70CEA249EA02100A546CE /* GameScene.swift in Sources */,
+				49D70CE4249EA02100A546CE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		49D70CEF249EA02300A546CE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49D70CF0249EA02300A546CE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49D70CF4249EA02300A546CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		49D70CF5249EA02300A546CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		49D70CF7249EA02300A546CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BlinkerPappe/BlinkerPappe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = BlinkerPappe/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.frameworklabs.BlinkerPappe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		49D70CF8249EA02300A546CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BlinkerPappe/BlinkerPappe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = BlinkerPappe/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.frameworklabs.BlinkerPappe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49D70CDB249EA02100A546CE /* Build configuration list for PBXProject "BlinkerPappe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49D70CF4249EA02300A546CE /* Debug */,
+				49D70CF5249EA02300A546CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49D70CF6249EA02300A546CE /* Build configuration list for PBXNativeTarget "BlinkerPappe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49D70CF7249EA02300A546CE /* Debug */,
+				49D70CF8249EA02300A546CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		491CCB5924A2AEFC006232C7 /* XCRemoteSwiftPackageReference "Pappe" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/frameworklabs/Pappe.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		491CCB5C24A2AF25006232C7 /* Pappe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 491CCB5924A2AEFC006232C7 /* XCRemoteSwiftPackageReference "Pappe" */;
+			productName = Pappe;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 49D70CD8249EA02100A546CE /* Project object */;
+}
