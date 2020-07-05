@@ -170,26 +170,14 @@ class GameScene: SKScene {
         activity (name.BlinkerLeverMonitor, [name.rotation], [name.blinkerLeverPos]) { val in
             exec {
                 val.movedBlinkerLeverPos = BlinkerLeverPos.center
-                val.localBlinkerLeverPos = val.blinkerLeverPos as BlinkerLeverPos
-                val.prevLocalBlinkerLeverPos = val.localBlinkerLeverPos as BlinkerLeverPos
             }
             cobegin {
                 strong {
-                    doRun (name.BlinkerLeverMover, [self.blinkerLeverMove, val.prevLocalBlinkerLeverPos], [val.loc.movedBlinkerLeverPos])
+                    doRun (name.BlinkerLeverMover, [self.blinkerLeverMove, val.blinkerLeverPos], [val.loc.movedBlinkerLeverPos])
                     nop
                 }
                 strong {
-                    doRun (name.BlinkerLeverRotationUpdater, [self.rotation, val.movedBlinkerLeverPos], [val.loc.localBlinkerLeverPos])
-                    nop
-                }
-                strong {
-                    loop {
-                        exec {
-                            val.blinkerLeverPos = val.localBlinkerLeverPos as BlinkerLeverPos
-                            val.prevLocalBlinkerLeverPos = val.localBlinkerLeverPos as BlinkerLeverPos
-                        }
-                        await { true }
-                    }
+                    doRun (name.BlinkerLeverRotationUpdater, [self.rotation, val.movedBlinkerLeverPos], [val.loc.blinkerLeverPos])
                     nop
                 }
             }
