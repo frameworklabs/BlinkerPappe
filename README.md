@@ -12,7 +12,7 @@ The program uses the SpriteKit framework which alternates at 60Hz between updati
 
 ## How to build
 
-Open the "BlinkerPappe.xcodeproj" project file with Xcode >= 11.5 - it should automatically resolve the needed Pappe Package dependency.
+Open the "BlinkerPappe.xcodeproj" project file with Xcode >= 12.0 - it should automatically resolve the needed Pappe Package dependency.
 
 ## Caveats
 
@@ -21,6 +21,4 @@ The Pappe DSL is more of a proof of concept. It has many shortcommings like:
 * No causality checking.
 * Interpreted instead of compiled.
 * Untyped and unchecked variables.
-* The way Swift functionBuilders are used requires always at least 2 statements - hence many ugly `nop` statements.
-* FunctionBuilder support for `if` statements not used.
 * Poor Test coverage.
