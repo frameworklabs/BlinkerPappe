@@ -63,7 +63,6 @@ class GameScene: SKScene {
         
         activity (name.Delay, [name.secs]) { val in
             doRun (name.DelayTicks, [Int(60 * val.secs as Double)])
-            nop
         }
         
         activity (name.Blinker, [name.ratio, name.blinker]) { val in
@@ -73,7 +72,6 @@ class GameScene: SKScene {
                 exec { (val.blinker as SKShapeNode).isOn = false }
                 doRun (name.Delay, [(val.ratio as Ratio).denom])
             }
-            nop
         }
         
         activity (name.ConditionalBlinker, [name.pos, name.targetPos, name.blinker]) { val in
@@ -81,11 +79,9 @@ class GameScene: SKScene {
                 await { val.pos as BlinkerLeverPos == val.targetPos }
                 whenAbort (val.pos as BlinkerLeverPos != val.targetPos) {
                     doRun (name.Blinker, [self.blinkerRatioTurning, val.blinker])
-                    nop
                 }
                 exec { (val.blinker as SKShapeNode).fillColor = .clear }
             }
-            nop
         }
         
         activity (name.WheelPosMonitor, [], [name.rotation]) { val in
@@ -96,7 +92,6 @@ class GameScene: SKScene {
                 }
                 await { true }
             }
-            nop
         }
 
         activity (name.BlinkerLeverMover, [name.blinkerLeverMove, name.prevBlinkerLeverPos], [name.blinkerLeverPos]) { val in
@@ -108,7 +103,6 @@ class GameScene: SKScene {
                             pos.moveUp()
                             val.blinkerLeverPos = pos
                         }
-                        nop
                     }
                     cond (val.blinkerLeverMove == BlinkerLeverPos.down) {
                         exec {
@@ -116,16 +110,13 @@ class GameScene: SKScene {
                             pos.moveDown()
                             val.blinkerLeverPos = pos
                         }
-                        nop
                     }
                     cond (true) {
                         exec { val.blinkerLeverPos = val.prevBlinkerLeverPos as BlinkerLeverPos }
-                        nop
                     }
                 }
                 await { true }
             }
-            nop
         }
         
         activity (name.BlinkerLeverRotationUpdater, [name.rotation, name.movedBlinkerLeverPos], [name.blinkerLeverPos]) { val in
@@ -142,25 +133,20 @@ class GameScene: SKScene {
                                     val.blinkerLeverPos = BlinkerLeverPos.center
                                     val.rotationSum = 0
                                 }
-                                nop
                             }
                             cond (val.rotationSum <= -self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.down) {
                                 exec {
                                     val.blinkerLeverPos = BlinkerLeverPos.center
                                     val.rotationSum = 0
                                 }
-                                nop
                             }
                             cond (true) {
                                 exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
-                                nop
                             }
                         }
-                        nop
                     }
                     cond (true) {
                         exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
-                        nop
                     }
                 }
                 await { true }
@@ -174,14 +160,11 @@ class GameScene: SKScene {
             cobegin {
                 strong {
                     doRun (name.BlinkerLeverMover, [self.blinkerLeverMove, val.blinkerLeverPos], [val.loc.movedBlinkerLeverPos])
-                    nop
                 }
                 strong {
                     doRun (name.BlinkerLeverRotationUpdater, [self.rotation, val.movedBlinkerLeverPos], [val.loc.blinkerLeverPos])
-                    nop
                 }
             }
-            nop
         }
         
         activity (name.BlinkerController, [name.warningPushed, name.blinkerLeverPos]) { val in
@@ -190,34 +173,27 @@ class GameScene: SKScene {
                     cobegin {
                         strong {
                             doRun (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.up, self.rightBlinker!])
-                            nop
                         }
                         strong {
                             doRun (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.down, self.leftBlinker!])
-                            nop
                         }
                     }
-                    nop
                 }
                 whenAbort (val.warningPushed as Bool) {
                     cobegin {
                         strong {
                             doRun (name.Blinker, [self.blinkerRatioWarning, self.leftBlinker!])
-                            nop
                         }
                         strong {
                             doRun (name.Blinker, [self.blinkerRatioWarning, self.rightBlinker!])
-                            nop
                         }
                     }
-                    nop
                 }
                 exec {
                     self.leftBlinker.isOn = false
                     self.rightBlinker.isOn = false
                 }
             }
-            nop
         }
         
         activity (name.Main, []) { val in
@@ -228,22 +204,18 @@ class GameScene: SKScene {
             cobegin {
                 strong {
                     doRun (name.WheelPosMonitor, [], [val.loc.rotation])
-                    nop
                 }
                 strong {
                     doRun (name.BlinkerLeverMonitor, [val.rotation], [val.loc.blinkerLeverPos])
-                    nop
                 }
                 strong {
                     doRun (name.BlinkerController, [self.warningPushed, val.blinkerLeverPos])
-                    nop
                 }
                 weak {
                     loop {
                         exec { self.lever.setBlinkerLeverPos(val.blinkerLeverPos) }
                         await { true }
                     }
-                    nop
                 }
             }
         }
