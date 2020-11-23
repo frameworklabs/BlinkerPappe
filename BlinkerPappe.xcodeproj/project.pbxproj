@@ -357,8 +357,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/frameworklabs/Pappe.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.0.5;
+				kind = exactVersion;
+				version = 0.0.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

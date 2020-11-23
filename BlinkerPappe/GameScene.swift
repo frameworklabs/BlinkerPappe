@@ -55,37 +55,37 @@ class GameScene: SKScene {
         
         activity (name.DelayTicks, [name.ticks]) { val in
             exec { val.counter = val.ticks as Int }
-            loopUntil({
+            `repeat` {
                 exec { val.counter -= 1 }
                 await { true }
-            }, val.counter == 0)
+            } until: { val.counter == 0 }
         }
         
         activity (name.Delay, [name.secs]) { val in
-            doRun (name.DelayTicks, [Int(60 * val.secs as Double)])
+            Pappe.run (name.DelayTicks, [Int(60 * val.secs as Double)])
         }
         
         activity (name.Blinker, [name.ratio, name.blinker]) { val in
-            loop {
+            `repeat` {
                 exec { (val.blinker as SKShapeNode).isOn = true }
-                doRun (name.Delay, [(val.ratio as Ratio).nom])
+                Pappe.run (name.Delay, [(val.ratio as Ratio).nom])
                 exec { (val.blinker as SKShapeNode).isOn = false }
-                doRun (name.Delay, [(val.ratio as Ratio).denom])
+                Pappe.run (name.Delay, [(val.ratio as Ratio).denom])
             }
         }
         
         activity (name.ConditionalBlinker, [name.pos, name.targetPos, name.blinker]) { val in
-            loop {
+            `repeat` {
                 await { val.pos as BlinkerLeverPos == val.targetPos }
-                whenAbort (val.pos as BlinkerLeverPos != val.targetPos) {
-                    doRun (name.Blinker, [self.blinkerRatioTurning, val.blinker])
+                when { val.pos as BlinkerLeverPos != val.targetPos } abort: {
+                    Pappe.run (name.Blinker, [self.blinkerRatioTurning, val.blinker])
                 }
                 exec { (val.blinker as SKShapeNode).fillColor = .clear }
             }
         }
         
         activity (name.WheelPosMonitor, [], [name.rotation]) { val in
-            loop {
+            `repeat` {
                 exec {
                     val.rotation = self.rotation
                     self.wheel.position.x -= CGFloat(self.rotation) * 5
@@ -95,23 +95,23 @@ class GameScene: SKScene {
         }
 
         activity (name.BlinkerLeverMover, [name.blinkerLeverMove, name.prevBlinkerLeverPos], [name.blinkerLeverPos]) { val in
-            loop {
+            `repeat` {
                 match {
-                    cond (val.blinkerLeverMove == BlinkerLeverPos.up) {
+                    cond { val.blinkerLeverMove == BlinkerLeverPos.up } then: {
                         exec {
                             var pos = val.prevBlinkerLeverPos as BlinkerLeverPos
                             pos.moveUp()
                             val.blinkerLeverPos = pos
                         }
                     }
-                    cond (val.blinkerLeverMove == BlinkerLeverPos.down) {
+                    cond { val.blinkerLeverMove == BlinkerLeverPos.down } then: {
                         exec {
                             var pos = val.prevBlinkerLeverPos as BlinkerLeverPos
                             pos.moveDown()
                             val.blinkerLeverPos = pos
                         }
                     }
-                    cond (true) {
+                    cond { true } then: {
                         exec { val.blinkerLeverPos = val.prevBlinkerLeverPos as BlinkerLeverPos }
                     }
                 }
@@ -121,31 +121,31 @@ class GameScene: SKScene {
         
         activity (name.BlinkerLeverRotationUpdater, [name.rotation, name.movedBlinkerLeverPos], [name.blinkerLeverPos]) { val in
             exec { val.rotationSum = 0 }
-            loop {
+            `repeat` {
                 match {
-                    cond (val.movedBlinkerLeverPos != BlinkerLeverPos.center) {
+                    cond { val.movedBlinkerLeverPos != BlinkerLeverPos.center } then: {
                         exec {
                             val.rotationSum = self.updateRotationSum(val.rotation as Int, val.rotationSum as Int)
                         }
                         match {
-                            cond (val.rotationSum >= self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.up) {
+                            cond { val.rotationSum >= self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.up } then: {
                                 exec {
                                     val.blinkerLeverPos = BlinkerLeverPos.center
                                     val.rotationSum = 0
                                 }
                             }
-                            cond (val.rotationSum <= -self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.down) {
+                            cond { val.rotationSum <= -self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.down } then: {
                                 exec {
                                     val.blinkerLeverPos = BlinkerLeverPos.center
                                     val.rotationSum = 0
                                 }
                             }
-                            cond (true) {
+                            cond { true } then: {
                                 exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
                             }
                         }
                     }
-                    cond (true) {
+                    cond { true } then: {
                         exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
                     }
                 }
@@ -159,33 +159,33 @@ class GameScene: SKScene {
             }
             cobegin {
                 strong {
-                    doRun (name.BlinkerLeverMover, [self.blinkerLeverMove, val.blinkerLeverPos], [val.loc.movedBlinkerLeverPos])
+                    Pappe.run (name.BlinkerLeverMover, [self.blinkerLeverMove, val.blinkerLeverPos], [val.loc.movedBlinkerLeverPos])
                 }
                 strong {
-                    doRun (name.BlinkerLeverRotationUpdater, [self.rotation, val.movedBlinkerLeverPos], [val.loc.blinkerLeverPos])
+                    Pappe.run (name.BlinkerLeverRotationUpdater, [self.rotation, val.movedBlinkerLeverPos], [val.loc.blinkerLeverPos])
                 }
             }
         }
         
         activity (name.BlinkerController, [name.warningPushed, name.blinkerLeverPos]) { val in
-            loop {
-                whenAbort (val.warningPushed as Bool) {
+            `repeat` {
+                when { val.warningPushed as Bool } abort: {
                     cobegin {
                         strong {
-                            doRun (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.up, self.rightBlinker!])
+                            Pappe.run (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.up, self.rightBlinker!])
                         }
                         strong {
-                            doRun (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.down, self.leftBlinker!])
+                            Pappe.run (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.down, self.leftBlinker!])
                         }
                     }
                 }
-                whenAbort (val.warningPushed as Bool) {
+                when { val.warningPushed as Bool } abort: {
                     cobegin {
                         strong {
-                            doRun (name.Blinker, [self.blinkerRatioWarning, self.leftBlinker!])
+                            Pappe.run (name.Blinker, [self.blinkerRatioWarning, self.leftBlinker!])
                         }
                         strong {
-                            doRun (name.Blinker, [self.blinkerRatioWarning, self.rightBlinker!])
+                            Pappe.run (name.Blinker, [self.blinkerRatioWarning, self.rightBlinker!])
                         }
                     }
                 }
@@ -203,16 +203,16 @@ class GameScene: SKScene {
             }
             cobegin {
                 strong {
-                    doRun (name.WheelPosMonitor, [], [val.loc.rotation])
+                    Pappe.run (name.WheelPosMonitor, [], [val.loc.rotation])
                 }
                 strong {
-                    doRun (name.BlinkerLeverMonitor, [val.rotation], [val.loc.blinkerLeverPos])
+                    Pappe.run (name.BlinkerLeverMonitor, [val.rotation], [val.loc.blinkerLeverPos])
                 }
                 strong {
-                    doRun (name.BlinkerController, [self.warningPushed, val.blinkerLeverPos])
+                    Pappe.run (name.BlinkerController, [self.warningPushed, val.blinkerLeverPos])
                 }
                 weak {
-                    loop {
+                    `repeat` {
                         exec { self.lever.setBlinkerLeverPos(val.blinkerLeverPos) }
                         await { true }
                     }
