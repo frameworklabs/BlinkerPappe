@@ -96,22 +96,22 @@ class GameScene: SKScene {
 
         activity (name.BlinkerLeverMover, [name.blinkerLeverMove, name.prevBlinkerLeverPos], [name.blinkerLeverPos]) { val in
             `repeat` {
-                match {
-                    cond { val.blinkerLeverMove == BlinkerLeverPos.up } then: {
+                select {
+                    match { val.blinkerLeverMove == BlinkerLeverPos.up } then: {
                         exec {
                             var pos = val.prevBlinkerLeverPos as BlinkerLeverPos
                             pos.moveUp()
                             val.blinkerLeverPos = pos
                         }
                     }
-                    cond { val.blinkerLeverMove == BlinkerLeverPos.down } then: {
+                    match { val.blinkerLeverMove == BlinkerLeverPos.down } then: {
                         exec {
                             var pos = val.prevBlinkerLeverPos as BlinkerLeverPos
                             pos.moveDown()
                             val.blinkerLeverPos = pos
                         }
                     }
-                    cond { true } then: {
+                    otherwise {
                         exec { val.blinkerLeverPos = val.prevBlinkerLeverPos as BlinkerLeverPos }
                     }
                 }
@@ -122,32 +122,30 @@ class GameScene: SKScene {
         activity (name.BlinkerLeverRotationUpdater, [name.rotation, name.movedBlinkerLeverPos], [name.blinkerLeverPos]) { val in
             exec { val.rotationSum = 0 }
             `repeat` {
-                match {
-                    cond { val.movedBlinkerLeverPos != BlinkerLeverPos.center } then: {
-                        exec {
-                            val.rotationSum = self.updateRotationSum(val.rotation as Int, val.rotationSum as Int)
-                        }
-                        match {
-                            cond { val.rotationSum >= self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.up } then: {
-                                exec {
-                                    val.blinkerLeverPos = BlinkerLeverPos.center
-                                    val.rotationSum = 0
-                                }
-                            }
-                            cond { val.rotationSum <= -self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.down } then: {
-                                exec {
-                                    val.blinkerLeverPos = BlinkerLeverPos.center
-                                    val.rotationSum = 0
-                                }
-                            }
-                            cond { true } then: {
-                                exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
+                `if` { val.movedBlinkerLeverPos != BlinkerLeverPos.center } then: {
+                    exec {
+                        val.rotationSum = self.updateRotationSum(val.rotation as Int, val.rotationSum as Int)
+                    }
+                    select {
+                        match { val.rotationSum >= self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.up } then: {
+                            exec {
+                                val.blinkerLeverPos = BlinkerLeverPos.center
+                                val.rotationSum = 0
                             }
                         }
+                        match { val.rotationSum <= -self.rotationThreshold && val.movedBlinkerLeverPos == BlinkerLeverPos.down } then: {
+                            exec {
+                                val.blinkerLeverPos = BlinkerLeverPos.center
+                                val.rotationSum = 0
+                            }
+                        }
+                        otherwise {
+                            exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
+                        }
                     }
-                    cond { true } then: {
-                        exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
-                    }
+                }
+                else: {
+                    exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
                 }
                 await { true }
             }
