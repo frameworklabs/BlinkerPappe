@@ -54,10 +54,10 @@ class GameScene: SKScene {
     lazy var control = Module { name in
         
         activity (name.DelayTicks, [name.ticks]) { val in
-            exec { val.counter = val.ticks as Int }
+            `exec` { val.counter = val.ticks as Int }
             `repeat` {
-                exec { val.counter -= 1 }
-                await { true }
+                `exec` { val.counter -= 1 }
+                `await` { true }
             } until: { val.counter == 0 }
         }
         
@@ -76,27 +76,24 @@ class GameScene: SKScene {
         
         activity (name.ConditionalBlinker, [name.pos, name.targetPos, name.blinker]) { val in
             `repeat` {
-                await { val.pos as BlinkerLeverPos == val.targetPos }
-                when { val.pos as BlinkerLeverPos != val.targetPos } abort: {
+                `await` { val.pos as BlinkerLeverPos == val.targetPos }
+                `when` { val.pos as BlinkerLeverPos != val.targetPos } abort: {
                     Pappe.run (name.Blinker, [self.blinkerRatioTurning, val.blinker])
                 }
-                exec { (val.blinker as SKShapeNode).fillColor = .clear }
+                `exec` { (val.blinker as SKShapeNode).fillColor = .clear }
             }
         }
         
         activity (name.WheelPosMonitor, [], [name.rotation]) { val in
-            `repeat` {
-                exec {
-                    val.rotation = self.rotation
-                    self.wheel.position.x -= CGFloat(self.rotation) * 5
-                }
-                await { true }
+            always {
+                val.rotation = self.rotation
+                self.wheel.position.x -= CGFloat(self.rotation) * 5
             }
         }
 
         activity (name.BlinkerLeverMover, [name.blinkerLeverMove, name.prevBlinkerLeverPos], [name.blinkerLeverPos]) { val in
             `repeat` {
-                select {
+                `select` {
                     match { val.blinkerLeverMove == BlinkerLeverPos.up } then: {
                         exec {
                             var pos = val.prevBlinkerLeverPos as BlinkerLeverPos
@@ -115,12 +112,12 @@ class GameScene: SKScene {
                         exec { val.blinkerLeverPos = val.prevBlinkerLeverPos as BlinkerLeverPos }
                     }
                 }
-                await { true }
+                `await` { true }
             }
         }
         
         activity (name.BlinkerLeverRotationUpdater, [name.rotation, name.movedBlinkerLeverPos], [name.blinkerLeverPos]) { val in
-            exec { val.rotationSum = 0 }
+            `exec` { val.rotationSum = 0 }
             `repeat` {
                 `if` { val.movedBlinkerLeverPos != BlinkerLeverPos.center } then: {
                     exec {
@@ -147,7 +144,7 @@ class GameScene: SKScene {
                 else: {
                     exec { val.blinkerLeverPos = val.movedBlinkerLeverPos as BlinkerLeverPos }
                 }
-                await { true }
+                `await` { true }
             }
         }
 
@@ -156,10 +153,10 @@ class GameScene: SKScene {
                 val.movedBlinkerLeverPos = BlinkerLeverPos.center
             }
             cobegin {
-                strong {
+                with {
                     Pappe.run (name.BlinkerLeverMover, [self.blinkerLeverMove, val.blinkerLeverPos], [val.loc.movedBlinkerLeverPos])
                 }
-                strong {
+                with {
                     Pappe.run (name.BlinkerLeverRotationUpdater, [self.rotation, val.movedBlinkerLeverPos], [val.loc.blinkerLeverPos])
                 }
             }
@@ -169,20 +166,20 @@ class GameScene: SKScene {
             `repeat` {
                 when { val.warningPushed as Bool } abort: {
                     cobegin {
-                        strong {
+                        with {
                             Pappe.run (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.up, self.rightBlinker!])
                         }
-                        strong {
+                        with {
                             Pappe.run (name.ConditionalBlinker, [val.blinkerLeverPos, BlinkerLeverPos.down, self.leftBlinker!])
                         }
                     }
                 }
                 when { val.warningPushed as Bool } abort: {
                     cobegin {
-                        strong {
+                        with {
                             Pappe.run (name.Blinker, [self.blinkerRatioWarning, self.leftBlinker!])
                         }
-                        strong {
+                        with {
                             Pappe.run (name.Blinker, [self.blinkerRatioWarning, self.rightBlinker!])
                         }
                     }
@@ -200,19 +197,18 @@ class GameScene: SKScene {
                 val.blinkerLeverPos = BlinkerLeverPos.center
             }
             cobegin {
-                strong {
+                with {
                     Pappe.run (name.WheelPosMonitor, [], [val.loc.rotation])
                 }
-                strong {
+                with {
                     Pappe.run (name.BlinkerLeverMonitor, [val.rotation], [val.loc.blinkerLeverPos])
                 }
-                strong {
+                with {
                     Pappe.run (name.BlinkerController, [self.warningPushed, val.blinkerLeverPos])
                 }
-                weak {
-                    `repeat` {
-                        exec { self.lever.setBlinkerLeverPos(val.blinkerLeverPos) }
-                        await { true }
+                with (.weak) {
+                    always {
+                        self.lever.setBlinkerLeverPos(val.blinkerLeverPos)
                     }
                 }
             }
